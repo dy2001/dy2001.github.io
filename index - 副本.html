@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>D♥Y</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background-color:#f03838;
+            margin: auto;
+            margin-top: 230px;
+            box-shadow: 0 0 10px #bd7979;
+        }
+        @keyframes move1 {
+            0%{
+                transform:rotate(1deg);
+                width: 100px;
+                height: 100px;
+            }
+            50%{
+                transform:rotate(45deg);
+                width: 120px;
+                height: 120px;
+            }
+            100%{
+                transform:rotate(90deg);
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+
+    </div>
+    <script>
+        function rotate(){
+            var div1 = document.getElementById('div1');
+            div1.style.animation='move1 1s 1';
+            setTimeout(function(){div1.style.animation='';},900);
+        }
+        setInterval(function(){
+            rotate();
+        }, 1000);
+    </script>
+</body>
+</html>

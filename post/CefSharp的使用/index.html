@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="dy2001">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="CefSharp的使用" />
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Yu&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://dy2001.cn" />
+  
+  <link rel="alternate" href="/atom.xml" title="Yu&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/favicon.png">
+  
+  <!-- <title>Yu&#39;s Blog | CefSharp的使用</title> -->
+  
+  <title>Yu's Blog | CefSharp的使用</title>
+  
+  <!-- Site Title -->
+  <!-- <title>Yu's Blog</title>  -->
+
+  <!-- Bootstrap CSS -->
+  
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  
+  
+<link rel="stylesheet" href="/css/style.light.css">
+
+
+  <!-- Google Analytics -->
+  
+
+  <!-- APlay -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    
+  </style>
+<meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/cover.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title" style="color:#F03838">CefSharp的使用</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  主页
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  文章
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/dy2001/" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By dy2001</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2020-01-10</span>
+            <!--<span class="time">20</span>-->
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/C-35/">#C&#35;</a> <a class="tag" href="/tags/CefSharp/">#CefSharp</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>&emsp;&emsp;最近写了一个小软件，要调一个API获取数据，但是需要登录请求头里带上Cookie才能请求，就在f12里把cookie复制出来然后用，但是有点麻烦。用WebBrowser(因为时IE内核，登录页面都显示不全)，Cookie一直获取不到，然后就选择了CefSharp.</p>
+<a id="more"></a>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>&emsp;&emsp;CefSharp是一个可以在Winform和WPF程序中使用的Chrome内核的一个包，用它可以代替WebBrowser。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li><p>CefSharp最低支持 .net4.5.2</p>
+</li>
+<li><p>创建一个Winform程序</p>
+</li>
+<li><p>打开Nuget包管理器搜索CefSharp，然后找到CefSharp.WinForms点击安装，包比较大，需要多装一会。</p>
+</li>
+<li><p>因为CefSharp不支持Any Cup，所以要在在解决方案上打开配置管理器，将平台设置为x86或x64。<br><img src="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/post/3CefShapr%E7%9A%84%E4%BD%BF%E7%94%A8/1.PNG" alt=""></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1></li>
+<li><p>添加using引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">using CefSharp;</span><br><span class="line">using CefSharp.WinForms;</span><br></pre></td></tr></table></figure></li>
+<li><p>定义一个全局的ChromiumWebBrowser对象</p>
+</li>
+<li><p>编写一个用于初始化浏览器的方法，并在构造方法里调用它</p>
+</li>
+<li><p>最后不要忘了在关闭窗体时清掉cef的进程<br>最后的代码是这个样子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public ChromiumWebBrowser chromeBrowser;</span><br><span class="line">public MainFrm()</span><br><span class="line">&#123;</span><br><span class="line">    InitializeComponent();</span><br><span class="line">    InitializeChromium();</span><br><span class="line">&#125;</span><br><span class="line">public void InitializeChromium()</span><br><span class="line">&#123;</span><br><span class="line">    CefSettings settings &#x3D; new CefSettings();</span><br><span class="line">    settings.Locale&#x3D; &quot;zh-CN&quot;;</span><br><span class="line">    settings.CachePath &#x3D; AppDomain.CurrentDomain.BaseDirectory + &quot;cache&quot;;</span><br><span class="line">    Cef.Initialize(settings);</span><br><span class="line">    chromeBrowser &#x3D; new ChromiumWebBrowser(&quot;http:&#x2F;&#x2F;www.baidu.com&#x2F;&quot;);</span><br><span class="line">    this.Controls.Add(chromeBrowser);</span><br><span class="line">    chromeBrowser.Dock &#x3D; DockStyle.Fill;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void MainFrm_FormClosing(object sender, FormClosingEventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    Cef.Shutdown();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/post/3CefShapr%E7%9A%84%E4%BD%BF%E7%94%A8/2.PNG" alt=""></p>
+<h2 id="获取Cookie"><a href="#获取Cookie" class="headerlink" title="获取Cookie"></a>获取Cookie</h2><p>&emsp;&emsp;用cefsharp的主要目的还是获取Cookie，打开一个网站，登录之后，再获取到Cookie，然后就可以为所欲为了。</p>
+</li>
+<li><p>写一个CookieVisitor类并继承ICookieVisitor</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class CookieVisitor : CefSharp.ICookieVisitor</span><br><span class="line">    &#123;</span><br><span class="line">        public event Action&lt;CefSharp.Cookie&gt; SendCookie;</span><br><span class="line"></span><br><span class="line">        public void Dispose()</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public bool Visit(CefSharp.Cookie cookie, int count, int total, ref bool deleteCookie)</span><br><span class="line">        &#123;</span><br><span class="line">            deleteCookie &#x3D; false;</span><br><span class="line">            if (SendCookie !&#x3D; null)</span><br><span class="line">            &#123;</span><br><span class="line">                SendCookie(cookie);</span><br><span class="line">            &#125;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>定义一个全局变量来存cookie<br><code>string cookies;</code></p>
+</li>
+<li><p>写一个获取cookie的方法,在写一个页面加载完成的页面，在页面加载完成时调用获取cookie的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private void visitor_SendCookie(CefSharp.Cookie obj)</span><br><span class="line">        &#123;</span><br><span class="line">            cookies +&#x3D; obj.Name + &quot;&#x3D;&quot; + obj.Value + &quot;;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">private void browser_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            var cookieManager &#x3D; CefSharp.Cef.GetGlobalCookieManager();</span><br><span class="line">            CookieVisitor visitor &#x3D; new CookieVisitor();</span><br><span class="line">            visitor.SendCookie +&#x3D; visitor_SendCookie;</span><br><span class="line">            cookieManager.VisitAllCookies(visitor);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在构造方法里绑定事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public MainFrm()</span><br><span class="line">        &#123;</span><br><span class="line">            InitializeComponent();</span><br><span class="line">            InitializeChromium();</span><br><span class="line">            chromeBrowser.FrameLoadEnd +&#x3D; browser_FrameLoadEnd;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>再添加一个按钮用来显示cookie<br><img src="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/post/3CefShapr%E7%9A%84%E4%BD%BF%E7%94%A8/3.PNG" alt=""><br>&emsp;&emsp;完成！<br>&emsp;&emsp;还有一个值得注意的坑就是，browser_FrameLoadEnd里执行完直接获取一般是获取不到的，值时空的，要等一下才可以获取到，比如再MessageBox.Show(cookies);上面加一句System.Threading.Thread.Sleep(1000);就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">private void browser_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            var cookieManager &#x3D; CefSharp.Cef.GetGlobalCookieManager();</span><br><span class="line">            CookieVisitor visitor &#x3D; new CookieVisitor();</span><br><span class="line">            visitor.SendCookie +&#x3D; visitor_SendCookie;</span><br><span class="line">            cookieManager.VisitAllCookies(visitor);</span><br><span class="line">            MessageBox.Show(cookies); ！！！获取不到</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>&emsp;&emsp;到这里如果你的代码还有问题或者不理解可以看看完整代码，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    public partial class MainFrm : Form</span><br><span class="line">    &#123;</span><br><span class="line">        public ChromiumWebBrowser chromeBrowser;</span><br><span class="line">        string cookies;</span><br><span class="line">        public MainFrm()</span><br><span class="line">        &#123;</span><br><span class="line">            InitializeComponent();</span><br><span class="line">            InitializeChromium();</span><br><span class="line">            chromeBrowser.FrameLoadEnd +&#x3D; browser_FrameLoadEnd;</span><br><span class="line">        &#125;</span><br><span class="line">        public void InitializeChromium()</span><br><span class="line">        &#123;</span><br><span class="line">            CefSettings settings &#x3D; new CefSettings();</span><br><span class="line">            settings.Locale&#x3D; &quot;zh-CN&quot;;</span><br><span class="line">            settings.CachePath &#x3D; AppDomain.CurrentDomain.BaseDirectory + &quot;cache&quot;;</span><br><span class="line">            Cef.Initialize(settings);</span><br><span class="line">            chromeBrowser &#x3D; new ChromiumWebBrowser(&quot;http:&#x2F;&#x2F;www.baidu.com&#x2F;&quot;);</span><br><span class="line">            this.Controls.Add(chromeBrowser);</span><br><span class="line">            chromeBrowser.Dock &#x3D; DockStyle.Fill;</span><br><span class="line">        &#125;</span><br><span class="line">        private void browser_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            var cookieManager &#x3D; CefSharp.Cef.GetGlobalCookieManager();</span><br><span class="line">            CookieVisitor visitor &#x3D; new CookieVisitor();</span><br><span class="line">            visitor.SendCookie +&#x3D; visitor_SendCookie;</span><br><span class="line">            cookieManager.VisitAllCookies(visitor);</span><br><span class="line">        &#125;</span><br><span class="line">        private void visitor_SendCookie(CefSharp.Cookie obj)</span><br><span class="line">        &#123;</span><br><span class="line">            cookies +&#x3D; obj.Name + &quot;&#x3D;&quot; + obj.Value + &quot;;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        private void MainFrm_FormClosing(object sender, FormClosingEventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            Cef.Shutdown();</span><br><span class="line">        &#125;</span><br><span class="line">        private void button1_Click(object sender, EventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            MessageBox.Show(cookies);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public class CookieVisitor : CefSharp.ICookieVisitor</span><br><span class="line">    &#123;</span><br><span class="line">        public event Action&lt;CefSharp.Cookie&gt; SendCookie;</span><br><span class="line">        public void Dispose()</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        public bool Visit(CefSharp.Cookie cookie, int count, int total, ref bool deleteCookie)</span><br><span class="line">        &#123;</span><br><span class="line">            deleteCookie &#x3D; false;</span><br><span class="line">            if (SendCookie !&#x3D; null)</span><br><span class="line">            &#123;</span><br><span class="line">                SendCookie(cookie);</span><br><span class="line">            &#125;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        <p id="RunningTime" class="copyright text-muted">
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+
+<script src="/js/highlight.pack.js"></script>
+
+
+<script src="/js/my.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-60},"mobile":{"show":false},"log":false});</script></body>
+</html>
+

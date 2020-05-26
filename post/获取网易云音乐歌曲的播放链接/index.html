@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="dy2001">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="获取网易云音乐歌曲的播放链接" />
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Yu&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://dy2001.cn" />
+  
+  <link rel="alternate" href="/atom.xml" title="Yu&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/favicon.png">
+  
+  <!-- <title>Yu&#39;s Blog | 获取网易云音乐歌曲的播放链接</title> -->
+  
+  <title>Yu's Blog | 获取网易云音乐歌曲的播放链接</title>
+  
+  <!-- Site Title -->
+  <!-- <title>Yu's Blog</title>  -->
+
+  <!-- Bootstrap CSS -->
+  
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  
+  
+<link rel="stylesheet" href="/css/style.light.css">
+
+
+  <!-- Google Analytics -->
+  
+
+  <!-- APlay -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    
+  </style>
+<meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/cover.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title" style="color:#F03838">获取网易云音乐歌曲的播放链接</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  主页
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  文章
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/dy2001/" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By dy2001</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2020-01-17</span>
+            <!--<span class="time">20</span>-->
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90/">#网易云音乐</a> <a class="tag" href="/tags/APlayer/">#APlayer</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>&emsp;&emsp;获取网易云音乐歌曲的播放链接</p>
+<a id="more"></a>
+<h1 id="获取音乐id"><a href="#获取音乐id" class="headerlink" title="获取音乐id"></a>获取音乐id</h1><p>&emsp;&emsp;打开网易云音乐官网，搜索你想要的歌，然后进入歌曲详情页，复制音乐id。<br><img src="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/post/5%E8%8E%B7%E5%8F%96%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%AD%8C%E6%9B%B2%E7%9A%84%E6%92%AD%E6%94%BE%E9%93%BE%E6%8E%A5/1.png" alt=""></p>
+<p>&emsp;&emsp;把下面链接的<code>音乐ID</code>替换成你复制的id,然后这个链接就是这首歌的真实链接了。</p>
+<ul>
+<li><code>https://music.163.com/song/media/outer/url?id=+音乐ID+.mp3</code></li>
+<li>例：<a href="https://music.163.com/song/media/outer/url?id=29004400.mp3" target="_blank" rel="noopener">https://music.163.com/song/media/outer/url?id=29004400.mp3</a></li>
+</ul>
+<h1 id="使用APlayer"><a href="#使用APlayer" class="headerlink" title="使用APlayer"></a>使用APlayer</h1><ul>
+<li><p>引入js文件和css文件(这里推荐使用CDN)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;aplayer@1.10.0&#x2F;dist&#x2F;APlayer.min.css&quot;&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;aplayer@1.10.0&#x2F;dist&#x2F;APlayer.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;aplayer&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化播放器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">const ap &#x3D; new APlayer(&#123;</span><br><span class="line">    container: document.getElementById(&#39;aplayer&#39;),</span><br><span class="line">    audio: [&#123;</span><br><span class="line">        name: &#39;烟火里的尘埃&#39;,</span><br><span class="line">        artist: &#39;华晨宇&#39;,</span><br><span class="line">        url: &#39;https:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;29004400.mp3&#39;,</span><br><span class="line">        cover: &#39;http:&#x2F;&#x2F;p1.music.126.net&#x2F;_49Xz_x9kTTdEgmYYk6w2w&#x3D;&#x3D;&#x2F;6672936069046297.jpg?param&#x3D;130y130&#39;</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>✍更多食用方法详见<a href="http://aplayer.js.org/#/zh-Hans/" target="_blank" rel="noopener">官方文档</a></p>
+</li>
+</ul>
+<div id="hqwyyyydbflj"></div>
+<script>
+    const ap = new APlayer({
+        container: document.getElementById('hqwyyyydbflj'),
+        mini:false,
+        theme:'#F03838',
+        autoplay:false,
+        preload:'none',
+        audio: [{
+            name: '烟火里的尘埃',
+            artist: '华晨宇',
+            url: 'https://music.163.com/song/media/outer/url?id=29004400.mp3',
+            cover: 'http://p1.music.126.net/_49Xz_x9kTTdEgmYYk6w2w==/6672936069046297.jpg?param=130y130'
+        }]
+    });
+</script>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        <p id="RunningTime" class="copyright text-muted">
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+
+<script src="/js/highlight.pack.js"></script>
+
+
+<script src="/js/my.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-60},"mobile":{"show":false},"log":false});</script></body>
+</html>
+

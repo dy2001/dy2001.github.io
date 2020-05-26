@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="dy2001">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Docker安装Redis" />
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Yu&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://dy2001.cn" />
+  
+  <link rel="alternate" href="/atom.xml" title="Yu&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/favicon.png">
+  
+  <!-- <title>Yu&#39;s Blog | Docker安装Redis</title> -->
+  
+  <title>Yu's Blog | Docker安装Redis</title>
+  
+  <!-- Site Title -->
+  <!-- <title>Yu's Blog</title>  -->
+
+  <!-- Bootstrap CSS -->
+  
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  
+  
+<link rel="stylesheet" href="/css/style.light.css">
+
+
+  <!-- Google Analytics -->
+  
+
+  <!-- APlay -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    
+  </style>
+<meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/cover.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title" style="color:#F03838">Docker安装Redis</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  主页
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  文章
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/dy2001/" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By dy2001</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2020-04-01</span>
+            <!--<span class="time">20</span>-->
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Linux/">#Linux</a> <a class="tag" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">#数据库</a> <a class="tag" href="/tags/Redis/">#Redis;</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <a id="more"></a>
+
+<h1 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h1><p><code>docker pull redis</code></p>
+<h1 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h1><p><code>docker run -p 6379:6379 --name redis -v /home/dockerVolumes/redis/conf/redis.conf:/etc/redis/redis.conf -v /home/dockerVolumes/redis/data:/data -d redis-server /etc/redis/redis.conf --appendonly yes</code></p>
+<ul>
+<li>-p 6379:6379 端口映射：前表示主机部分:后表示容器部分。</li>
+<li>–name redis  指定该容器名称，查看和进行操作都比较方便。</li>
+<li>-v 数据卷挂载, 用于将容器和数据分离，规则与端口映射相同。</li>
+<li>-d 表示后台启动redis</li>
+<li>redis-server /etc/redis/redis.conf 以配置文件启动redis，加载容器内的conf文件</li>
+<li>appendonly yes 开启redis 持久化</li>
+</ul>
+<p><code>docker exec -it redis /bin/bash</code><br>进入容器内部</p>
+<p>输入<code>redis-cli</code>进入redis命令行工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@iZaqwt7mq03445Z:~# docker exec -it redis &#x2F;bin&#x2F;bash</span><br><span class="line">root@58888e728b69:&#x2F;data# redis-cli</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set test hello</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get test</span><br><span class="line">&quot;hello&quot;</span><br><span class="line">127.0.0.1:6379&gt; del test</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; get test</span><br><span class="line">(nil)</span><br><span class="line">127.0.0.1:6379&gt; exit</span><br></pre></td></tr></table></figure>
+
+<p><code>exit</code> 退出</p>
+<p>完成！</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        <p id="RunningTime" class="copyright text-muted">
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+
+<script src="/js/highlight.pack.js"></script>
+
+
+<script src="/js/my.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-60},"mobile":{"show":false},"log":false});</script></body>
+</html>
+

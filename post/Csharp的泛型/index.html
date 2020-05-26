@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="dy2001">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="C#的泛型" />
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Yu&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://dy2001.cn" />
+  
+  <link rel="alternate" href="/atom.xml" title="Yu&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/favicon.png">
+  
+  <!-- <title>Yu&#39;s Blog | C#的泛型</title> -->
+  
+  <title>Yu's Blog | C#的泛型</title>
+  
+  <!-- Site Title -->
+  <!-- <title>Yu's Blog</title>  -->
+
+  <!-- Bootstrap CSS -->
+  
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  
+  
+<link rel="stylesheet" href="/css/style.light.css">
+
+
+  <!-- Google Analytics -->
+  
+
+  <!-- APlay -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    
+  </style>
+<meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/cover.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title" style="color:#F03838">C#的泛型</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  主页
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  文章
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/dy2001/" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By dy2001</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2020-01-13</span>
+            <!--<span class="time">20</span>-->
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/C-35/">#C&#35;</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>&emsp;&emsp;泛型是 2.0 版 C# 语言和公共语言运行库 (CLR) 中的一个新功能。泛型将类型参数的概念引入 .NET Framework，类型参数使得设计如下类和方法成为可能：这些类和方法将一个或多个类型的指定推迟到客户端代码声明并实例化该类或方法的时候。例如，通过使用泛型类型参数 T，您可以编写其他客户端代码能够使用的单个类，而不致引入运行时强制转换或装箱操作的成本或风险。</p>
+<a id="more"></a>
+<h1 id="初识泛型"><a href="#初识泛型" class="headerlink" title="初识泛型"></a>初识泛型</h1><p>&emsp;&emsp;假设你要为一组整型数据写一个排序算法，又要为一组浮点型数据写一个排序算法。</p>
+<p>&emsp;&emsp;如果没有泛型类型，你会怎么做呢？</p>
+<p>&emsp;&emsp;你可能想到了方法的重载，写两个同名方法，一个方法接收整型数组，另一个方法接收浮点型的数组。</p>
+<p>&emsp;&emsp;但有了泛型，你就完全不必这么做，只要设计一个方法就够用了，你甚至可以用这个方法为一组字符串数据排序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static void ConsoleMsg&lt;T&gt;(T msg)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.Write(msg.GetType());</span><br><span class="line">            Console.WriteLine(&quot;:&quot;+msg.ToString());</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;ConsoleMsg就是一个泛型方法，它的作用就是根据传过来的值来输出值的类型和内容。<br>调用这个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ConsoleMsg&lt;int&gt;(111);</span><br><span class="line">Console.WriteLine(&quot;---------------&quot;);</span><br><span class="line">ConsoleMsg&lt;string&gt;(&quot;111&quot;);</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.Int32:111</span><br><span class="line">---------------</span><br><span class="line">System.String:111</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这样子只要写一个方法就可以处理不同类型的数据，你只需要在使用的时候告诉这个方法要处理的类型。</p>
+<hr>
+<h1 id="创建一个泛型类"><a href="#创建一个泛型类" class="headerlink" title="创建一个泛型类"></a>创建一个泛型类</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Animal&lt;T&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        public T Id &#123; get; set; &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>创建一个Animal类它的Id属性的类型是由T来决定的，使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Animal&lt;int&gt; animal1 &#x3D; new Animal&lt;int&gt;();</span><br><span class="line">animal1.Id &#x3D; 1;</span><br><span class="line">Animal&lt;string&gt; animal2 &#x3D; new Animal&lt;string&gt;();</span><br><span class="line">animal2.Id &#x3D; &quot;猫科&quot;;</span><br></pre></td></tr></table></figure>
+<h1 id="泛型的继承"><a href="#泛型的继承" class="headerlink" title="泛型的继承"></a>泛型的继承</h1><p>&emsp;&emsp;泛型类型可以继承自其他类型，我们声明一个Cat类，然后继承Animal</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Cat:Animal&lt;int&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        public string Name &#123; get; set; &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;细心的话会发现<code>Animal&lt;int&gt;</code>这里需要声明类型，不然是会不通过编译检查，如果你的Cat类和Animal类都要使用同一类型的话，用下面这种写法也可的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Cat&lt;T&gt;:Animal&lt;T&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        public string Name &#123; get; set; &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="泛型接口和泛型委托"><a href="#泛型接口和泛型委托" class="headerlink" title="泛型接口和泛型委托"></a>泛型接口和泛型委托</h1><p>&emsp;&emsp;泛型接口和泛型委托与泛型类除了声明关键字不一样，格式都是一样的。可以自己多试试。</p>
+<h1 id="泛型约束"><a href="#泛型约束" class="headerlink" title="泛型约束"></a>泛型约束</h1><p>&emsp;&emsp;如果你设计了一个泛型类型，不希望别人传入任意类型的参数，就可以用到泛型约束。约束使用约束使用where关键字指定。</p>
+<p>&emsp;&emsp;我们对Animal这个类改造一下，让它只能接受值类型的参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Animal&lt;T&gt; where T : struct</span><br><span class="line">    &#123;</span><br><span class="line">        public T Id &#123; get; set; &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Animal&lt;int&gt; animal1 &#x3D; new Animal&lt;int&gt;();</span><br><span class="line">animal1.Id &#x3D; 1;</span><br><span class="line">Animal&lt;string&gt; animal2 &#x3D; new Animal&lt;string&gt;();！！！报错</span><br><span class="line">animal2.Id &#x3D; &quot;猫科&quot;;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;因为string是引用类型，所以会报错。使用约束可以使用我们对泛型成员执行操作时变得更加安全。想要其它约束可以查看下表：</p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>where T: struct</td>
+<td>类型参数必须是值类型</td>
+</tr>
+<tr>
+<td>where T: class</td>
+<td>类型参数必须是引用类型</td>
+</tr>
+<tr>
+<td>where T: new()</td>
+<td>类型参数必须有一个 public 且无参数的构造函数</td>
+</tr>
+<tr>
+<td><code>where T: &lt;base classname&gt;</code></td>
+<td>类型参数必须继承至指定的基类（base class）</td>
+</tr>
+<tr>
+<td><code>where T: &lt;interface name&gt;</code></td>
+<td>类型参数必须是指定的接口或实现了指定接口的类型</td>
+</tr>
+<tr>
+<td>where T: U</td>
+<td>为 T 提供的类型参数必须是为 U 提供的参数或派生自为 U 提供的参数</td>
+</tr>
+</tbody></table>
+<h1 id="逆变和协变"><a href="#逆变和协变" class="headerlink" title="逆变和协变"></a>逆变和协变</h1><blockquote>
+<p>逆变：泛型类型T可以从基类型更改为该类的派生类型，用in关键字标记逆变形式的类型参数，而且这个参数一般作输入参数。</p>
+</blockquote>
+<blockquote>
+<p>协变：泛型类型T可以从派生类型更改为它的基类型，用out关键字来标记协变形式的类型参数，而且这个参数一般作为返回值。</p>
+</blockquote>
+<p>只有接口和委托的泛型类型才可以使用逆变和协变的特性。</p>
+<p>&emsp;&emsp;定义一个委托</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delegate T Zoo&lt;T&gt;();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Zoo&lt;Cat&gt; cat &#x3D; Show;</span><br><span class="line">Zoo&lt;Animal&lt;int&gt;&gt; animal &#x3D; cat; ！！！报错</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;然后用基类直接去=派生类是会报错的，这时候就需要用到协变。加上关键out就可以，反之就是逆变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delegate T Zoo&lt;out T&gt;();</span><br></pre></td></tr></table></figure>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        <p id="RunningTime" class="copyright text-muted">
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+
+<script src="/js/highlight.pack.js"></script>
+
+
+<script src="/js/my.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-60},"mobile":{"show":false},"log":false});</script></body>
+</html>
+

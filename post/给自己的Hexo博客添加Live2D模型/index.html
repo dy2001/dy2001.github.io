@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="dy2001">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="给自己的Hexo博客添加Live2D模型" />
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Yu&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://dy2001.cn" />
+  
+  <link rel="alternate" href="/atom.xml" title="Yu&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/favicon.png">
+  
+  <!-- <title>Yu&#39;s Blog | 给自己的Hexo博客添加Live2D模型</title> -->
+  
+  <title>Yu's Blog | 给自己的Hexo博客添加Live2D模型</title>
+  
+  <!-- Site Title -->
+  <!-- <title>Yu's Blog</title>  -->
+
+  <!-- Bootstrap CSS -->
+  
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  
+  
+<link rel="stylesheet" href="/css/style.light.css">
+
+
+  <!-- Google Analytics -->
+  
+
+  <!-- APlay -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    
+  </style>
+<meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/cover.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title" style="color:#F03838">给自己的Hexo博客添加Live2D模型</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  主页
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  文章
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/dy2001/" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By dy2001</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2020-01-06</span>
+            <!--<span class="time">20</span>-->
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Hexo/">#Hexo</a> <a class="tag" href="/tags/Live2D/">#Live2D</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>&emsp;&emsp;逛别人博客的时候发现很多人的博客都有一个超级可爱的Live2D模型,赶紧给自己的博客也弄一个。<br>&emsp;&emsp;好可爱！！！</p>
+<a id="more"></a> 
+<h1 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h1><p>&emsp;&emsp;进入Hexo的根目录安装live2d插件，打开命令行输入：<br><code>npm install --save hexo-helper-live2d</code></p>
+<h1 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h1><p>&emsp;&emsp;打开<a href="https://huaji8.top/post/live2d-plugin-2.0/" target="_blank" rel="noopener">模型展示网站</a>挑选你喜欢的模型，然后记住它的名字,也可以在<a href="https://github.com/xiazeyu/live2d-widget-models" target="_blank" rel="noopener">这个页面</a>查看所有的模型。</p>
+<h1 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h1><p>&emsp;&emsp;执行命令<code>npm install live2d-widget-model-</code>+你喜欢的模型名，我用的模型叫 <font color=red>hijiki</font> ,执行:<br><code>npm install live2d-widget-model-hijiki</code></p>
+<h1 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h1><p>&emsp;&emsp;编辑根目录下的 _config.yml 文件，添加如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  scriptFrom: local</span><br><span class="line">  pluginRootPath: live2dw&#x2F;</span><br><span class="line">  pluginJsPath: lib&#x2F;</span><br><span class="line">  pluginModelPath: assets&#x2F;</span><br><span class="line">  tagMode: false</span><br><span class="line">  debug: false</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-hijiki #你要展示的模型名字！！</span><br><span class="line">  display:</span><br><span class="line">    position: right #在页面的位置 right|left</span><br><span class="line">    width: 150  #宽</span><br><span class="line">    height: 300 #高</span><br><span class="line">    hOffset: 0  #水平偏移量</span><br><span class="line">    vOffset: -60  #垂直偏移量</span><br><span class="line">  mobile:</span><br><span class="line">    show: false #手机上是否显示 true|false</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;修改model.use的内容为你安装的模型</p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>&emsp;&emsp;执行命令:<code>hexo s</code><br>&emsp;&emsp;浏览器打开 localhost:4000 看看你的模型是不是就有了。<br>&emsp;&emsp;完成！<br><img src="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/post/2%E7%BB%99%E8%87%AA%E5%B7%B1%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0Live2D%E6%A8%A1%E5%9E%8B/1.PNG" alt="喵喵喵"></p>
+<h2 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h2><p>模型列表如下：</p>
+<ul>
+<li>live2d-widget-model-chitose</li>
+<li>live2d-widget-model-epsilon2_1</li>
+<li>live2d-widget-model-gf</li>
+<li>live2d-widget-model-haru/01 (use npm install –save live2d-widget-model-haru)</li>
+<li>live2d-widget-model-haru/02 (use npm install –save live2d-widget-model-haru)</li>
+<li>live2d-widget-model-haruto</li>
+<li>live2d-widget-model-hibiki</li>
+<li>live2d-widget-model-hijiki</li>
+<li>live2d-widget-model-izumi</li>
+<li>live2d-widget-model-koharu</li>
+<li>live2d-widget-model-miku</li>
+<li>live2d-widget-model-ni-j</li>
+<li>live2d-widget-model-nico</li>
+<li>live2d-widget-model-nietzsche</li>
+<li>live2d-widget-model-nipsilon</li>
+<li>live2d-widget-model-nito</li>
+<li>live2d-widget-model-shizuku</li>
+<li>live2d-widget-model-tororo</li>
+<li>live2d-widget-model-tsumiki</li>
+<li>live2d-widget-model-unitychan</li>
+<li>live2d-widget-model-wanko</li>
+<li>live2d-widget-model-z16</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        <p id="RunningTime" class="copyright text-muted">
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+
+<script src="/js/highlight.pack.js"></script>
+
+
+<script src="/js/my.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-60},"mobile":{"show":false},"log":false});</script></body>
+</html>
+

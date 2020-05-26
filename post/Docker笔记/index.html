@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="dy2001">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Docker笔记" />
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Yu&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://dy2001.cn" />
+  
+  <link rel="alternate" href="/atom.xml" title="Yu&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/favicon.png">
+  
+  <!-- <title>Yu&#39;s Blog | Docker笔记</title> -->
+  
+  <title>Yu's Blog | Docker笔记</title>
+  
+  <!-- Site Title -->
+  <!-- <title>Yu's Blog</title>  -->
+
+  <!-- Bootstrap CSS -->
+  
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  
+  
+<link rel="stylesheet" href="/css/style.light.css">
+
+
+  <!-- Google Analytics -->
+  
+
+  <!-- APlay -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    
+  </style>
+<meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/cover.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title" style="color:#F03838">Docker笔记</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  主页
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  文章
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/dy2001/" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By dy2001</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2020-03-19</span>
+            <!--<span class="time">20</span>-->
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/%E7%AC%94%E8%AE%B0/">#笔记</a> <a class="tag" href="/tags/Linux/">#Linux</a> <a class="tag" href="/tags/Docker/">#Docker;</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Docker笔记</p>
+<a id="more"></a>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/" target="_blank" rel="noopener">官方文档</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S docker</span><br><span class="line">docker info</span><br></pre></td></tr></table></figure>
+
+<h1 id="容器和镜像"><a href="#容器和镜像" class="headerlink" title="容器和镜像"></a>容器和镜像</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run &lt;镜像id&gt;	#运行指定镜像</span><br><span class="line">	docker run -d	#-d再后台运行</span><br><span class="line">	docker run -it	#-it进入交互模式</span><br><span class="line">docker pull	&lt;镜像名&gt;	#拉取镜像</span><br><span class="line">docker pull	&lt;镜像名&gt;:&lt;版本号&gt;	#拉取指定版本号镜像</span><br><span class="line">docker images	#列出本地所有镜像</span><br><span class="line">docker rmi &lt;镜像id&gt;	#删除指定镜像</span><br><span class="line">#镜像id前6未即可</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker ps	#列出正在运行的容器</span><br><span class="line">docker stop &lt;容器id&gt;	#停止指定容器</span><br><span class="line">docker rm &lt;容器id&gt;	#删除指定容器</span><br><span class="line">docker start &lt;容器id&gt;	#启动指定容器</span><br><span class="line">#容器id前6未即可，</span><br><span class="line">#stop只是暂停容器，容器的数据和状态都在(把你的笔记本合上)</span><br><span class="line">#rm只能删除已经暂停的容器，数据都会没（关机）</span><br><span class="line">#暂停删除启动后面可以多个id用空格分开，能一次性操作多个容器</span><br><span class="line">docker stop $(docker ps -aq)	-a列出所有容器-q是只返回id</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it &lt;容器ID&gt; &#x2F;bin&#x2F;bash	#进入容器内部执行命令</span><br><span class="line">	ls	-a</span><br><span class="line">exit	#退出</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Swarm集群"><a href="#Swarm集群" class="headerlink" title="Swarm集群"></a>Swarm集群</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sudo docker swarm init --advertise-addr &lt;内网IP&gt;：2377 --listen-addr &lt;内网IP&gt;:2377	#初始化本机为一个管理节点</span><br><span class="line"></span><br><span class="line">sudo docker swarm join-token manger	#生成一个管理节点的命令</span><br><span class="line">sudo docker swarm join-token worker	#生成一个工人节点的命令</span><br><span class="line">#在生成的命令后加上--advertise-addr &lt;内网IP&gt;：2377 --listen-addr &lt;内网IP&gt;:2377，然后在要成为节点的主机上执行命令即可成为一个节点</span><br><span class="line"></span><br><span class="line">sudo docker swarm leave --force	#取消设置本机为节点</span><br><span class="line"></span><br><span class="line">sudo docker node ls	#在管理节点执行命令可以查看当前集群的节点信息</span><br><span class="line"></span><br><span class="line">sudo docker node promote &lt;节点ID&gt;	#将节点提升为管理节点</span><br><span class="line">sudo docker node demote &lt;节点ID&gt;	#将节点降为工人节点</span><br><span class="line"></span><br><span class="line">sudo docker node ps &lt;节点名或者ID&gt;	#查看指定节点信息</span><br></pre></td></tr></table></figure>
+
+<h1 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sudo docker service create --name &lt;service名字&gt; -p 80:80 --replicas &lt;个数&gt; &lt;镜像名&gt;</span><br><span class="line">sudo docker service create --name aspcore -p 80:80 --replicas 5 microsoft&#x2F;dotnet-samples:aspnetapp </span><br><span class="line">##创建一个任务，这个任务可以复制多个容器</span><br><span class="line"></span><br><span class="line">sudo docker service ls	#列出正在执行的任务</span><br><span class="line">sudo docker service ps &lt;service名字&gt;	#查看任务的详细信息</span><br><span class="line">sudo docker service inspect &lt;service名字&gt;	#查看任务的配置信息</span><br><span class="line"></span><br><span class="line">sudo docker service update --replicas &lt;个数&gt; &lt;service名字&gt;</span><br><span class="line">sudo docker service update --replicas 7 aspcore</span><br><span class="line">(sudo docker service scale&#x3D;7)简写</span><br><span class="line">## 更新service的复制个数</span><br><span class="line"></span><br><span class="line">sudo docker service rm &lt;service名&gt;	#删除service</span><br><span class="line"></span><br><span class="line">sudo docker service update --image &lt;镜像名&gt; &lt;service名&gt;	#更新正在运行的容器中的镜像</span><br></pre></td></tr></table></figure>
+
+<h1 id="Swarm-Stack"><a href="#Swarm-Stack" class="headerlink" title="Swarm Stack"></a>Swarm Stack</h1><p><a href="https://docs.docker.com/engine/swarm/stack-deploy/" target="_blank" rel="noopener">文档</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">创建一个名为docker-compose.yml的配置文件</span><br><span class="line">内容为</span><br><span class="line">version: &#39;3&#39;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  web:</span><br><span class="line">    image: 127.0.0.1:5000&#x2F;stackdemo</span><br><span class="line">    build: .</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;8000:8000&quot;</span><br><span class="line">  redis:</span><br><span class="line">    image: redis:alpine</span><br><span class="line">    </span><br><span class="line">sudo docker stack deploy -c docker-compose.yml &lt;stack名&gt;</span><br><span class="line">sudo docker stack ls	#查看stack列表</span><br><span class="line">sudo docker stack services &lt;stack名&gt;	#查看stack下的service信息</span><br><span class="line">sudo docker stack ps &lt;stack名&gt;	#查看stack详细信息</span><br></pre></td></tr></table></figure>
+
+<p>待续未完。。。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        <p id="RunningTime" class="copyright text-muted">
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+
+<script src="/js/highlight.pack.js"></script>
+
+
+<script src="/js/my.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-60},"mobile":{"show":false},"log":false});</script></body>
+</html>
+

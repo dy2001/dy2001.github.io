@@ -1,0 +1,39 @@
+::-webkit-scrollbar {
+    width: 5px;
+    height: 4px;
+    scrollbar-arrow-color: red;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 90px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: #F03838;
+    scrollbar-arrow-color: red;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  blockquote {
+    border-left: 1px solid #F03838;
+  }
+
+  article h1{
+    color:#F03838;
+  }
+  article h2{
+    color:#F03838;
+  }
+  article h3{
+    color:#F03838;
+  }
+  article h4{
+    color:#F03838;
+  }
+  
+  table thead{
+    border-top: 1px solid #F03838;
+  }

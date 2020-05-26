@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="dy2001">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Docker安装SqlServer和MySql" />
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Yu&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://dy2001.cn" />
+  
+  <link rel="alternate" href="/atom.xml" title="Yu&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/favicon.png">
+  
+  <!-- <title>Yu&#39;s Blog | Docker安装SqlServer和MySql</title> -->
+  
+  <title>Yu's Blog | Docker安装SqlServer和MySql</title>
+  
+  <!-- Site Title -->
+  <!-- <title>Yu's Blog</title>  -->
+
+  <!-- Bootstrap CSS -->
+  
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  
+  
+<link rel="stylesheet" href="/css/style.light.css">
+
+
+  <!-- Google Analytics -->
+  
+
+  <!-- APlay -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    
+  </style>
+<meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/cover.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title" style="color:#F03838">Docker安装SqlServer和MySql</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  主页
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  文章
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/dy2001/" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By dy2001</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2020-04-16</span>
+            <!--<span class="time">20</span>-->
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Docker/">#Docker</a> <a class="tag" href="/tags/Linux/">#Linux</a> <a class="tag" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">#数据库</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>SqlServer这个东西在安装起来很费劲，在linux上更麻烦，好在有docker这个好东西，一条命令就能跑起来。</p>
+<a id="more"></a>
+
+<h1 id="SqlServer"><a href="#SqlServer" class="headerlink" title="SqlServer"></a>SqlServer</h1><p>如果你的项目需要SqlServer的话,强烈推荐你购买一台云服务或者在一台linux虚拟机里用docker来安装SqlServer，安装运行删除简单的跑一条命令就行了。<br>在本机直接安装SqlServer的话，基本就和系统绑定到一起了，删也删不净，平时还在后台运行对电脑有压力(尤其是笔记本用户),我个人是很不喜欢的。<br>我现在的方案就是购买一台服务器，用docker装SqlServer,MySql,Redis等等等，挺方便的。</p>
+<h2 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h2><p><code>docker pull mcr.microsoft.com/mssql/server:2017-CU8-ubuntu</code><br>因为微软现在所有的镜像都放在了自家的服务器上，不在docker hub托管了，所以下载比较慢。</p>
+<h2 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h2><p><code>docker run -e &#39;ACCEPT_EULA=Y&#39; -e &#39;SA_PASSWORD=数据库密码&#39; -p 1433:1433 --name mssqlserver -v /home/dockerVolumes/mssqldata:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2017-CU8-ubuntu</code></p>
+<ul>
+<li>-e ACCEPT_EULA=Y 好像是是接受协议的</li>
+<li>-e ‘SA_PASSWORD=’ 指定你的数据库密码，这个密码不能太简单。</li>
+<li>-p指定端口</li>
+<li>–name 指定容器名称</li>
+<li>-v数据卷挂载, 用于将容器和数据分离(指定的文件夹就是你的数据库文件，如果换服务器的话把这个文件夹复制走就可以了)</li>
+<li>-d后台运行</li>
+</ul>
+<p>运行<code>docker ps</code>查看mssqlserver是否正在运行</p>
+<p>完成！</p>
+<h1 id="MySql"><a href="#MySql" class="headerlink" title="MySql"></a>MySql</h1><h2 id="下载镜像-1"><a href="#下载镜像-1" class="headerlink" title="下载镜像"></a>下载镜像</h2><p><code>docker pull mysql:5.7.30</code></p>
+<h2 id="运行镜像-1"><a href="#运行镜像-1" class="headerlink" title="运行镜像"></a>运行镜像</h2><p><code>docker run -p 3306:3306 --name mysql -v /home/dockerVolumes/mysql/conf:/etc/mysql/conf.d -v /home/dockerVolumes/mysql/logs:/logs -v /home/dockerVolumes/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=数据库密码 -d mysql:5.7.30</code></p>
+<ul>
+<li>-p指定端口</li>
+<li>–name 指定容器名称</li>
+<li>-v数据卷挂载, 用于将容器和数据分离(指定的文件夹就是你的数据库文件，如果换服务器的话把这个文件夹复制走就可以了)</li>
+<li>-e MYSQL_ROOT_PASSWORD= 设置root用户的密码</li>
+<li>-d后台运行</li>
+</ul>
+<p>运行<code>docker ps</code>查看mysql是否正在运行</p>
+<p><code>docker exec -it mysql /bin/bash</code><br>进入容器内部</p>
+<p>输入<code>mysql -u root -p</code>然后按提示输入密码就可以进入mysql了</p>
+<p>执行<code>show databases;</code> 来查看所有数据库</p>
+<p><code>exit</code> 退出</p>
+<p>完成！</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        <p id="RunningTime" class="copyright text-muted">
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+
+<script src="/js/highlight.pack.js"></script>
+
+
+<script src="/js/my.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-60},"mobile":{"show":false},"log":false});</script></body>
+</html>
+

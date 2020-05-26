@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="dy2001">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="EF Core的使用" />
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Yu&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://dy2001.cn" />
+  
+  <link rel="alternate" href="/atom.xml" title="Yu&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link rel="icon" href="https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/favicon.png">
+  
+  <!-- <title>Yu&#39;s Blog | EF Core的使用</title> -->
+  
+  <title>Yu's Blog | EF Core的使用</title>
+  
+  <!-- Site Title -->
+  <!-- <title>Yu's Blog</title>  -->
+
+  <!-- Bootstrap CSS -->
+  
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  
+  
+<link rel="stylesheet" href="/css/style.light.css">
+
+
+  <!-- Google Analytics -->
+  
+
+  <!-- APlay -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    
+  </style>
+<meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(https://myblog-1257704959.cos.ap-chengdu.myqcloud.com/Image/cover.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title" style="color:#F03838">EF Core的使用</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  主页
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  文章
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/dy2001/" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By dy2001</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2020-02-11</span>
+            <!--<span class="time">20</span>-->
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/C-35/">#C&#35;</a> <a class="tag" href="/tags/EF-Core/">#EF Core</a> <a class="tag" href="/tags/ASP-NET-Core/">#ASP.NET Core</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Entity Framework (EF) Core 是轻量化、可扩展、开源和跨平台版的常用 Entity Framework 数据访问技术。<br>EF Core 可用作对象关系映射程序 (O/RM)，以便于 .NET 开发人员能够使用 .NET 对象来处理数据库，这样就不必经常编写大部分数据访问代码了。<br>EF Core 支持多个数据库引擎，请参阅<a href="https://docs.microsoft.com/zh-cn/ef/core/providers/index?tabs=dotnet-core-cli" target="_blank" rel="noopener">数据库提供程序</a>了解详细信息。</p>
+<a id="more"></a>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>创建一个ASP.NET Core Web程序<br>打开Nuget下载</p>
+<ul>
+<li>必须的库Microsoft.EntityFrameworkCore</li>
+<li>迁移需要的库Microsoft.EntityFrameworkCore.Tools</li>
+<li>实体框架核心工具的共享设计时组件Microsoft.EntityFrameworkCore.Design</li>
+<li>使用SqlServer必须的库Microsoft.EntityFrameworkCore.SqlServer</li>
+</ul>
+<h1 id="创建模型"><a href="#创建模型" class="headerlink" title="创建模型"></a>创建模型</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Book</span><br><span class="line">    &#123;</span><br><span class="line">        [Key]</span><br><span class="line">        public int BookId &#123; get; set; &#125;</span><br><span class="line">        [Required]</span><br><span class="line">        [StringLength(50)]</span><br><span class="line">        public string Title &#123; get; set; &#125;</span><br><span class="line">        [StringLength(50)]</span><br><span class="line">        public string Author &#123; get; set; &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>EF Core使用了三个概念来定义模型：约定、注释和FluentAPI。例如，用id前缀命名 int或Guid类型的属性，将该属性映射到主键。<br>可以使用注释重写约定–指定特性。例如[Required]=“不能为空(not null)”。<br>除了注释还可以使用FluentAPI，用于EF Core的FluentAPI比注释更强大。<br>通过FluentAPI来配置模型可以查看<a href="https://docs.microsoft.com/zh-cn/ef/core/modeling/" target="_blank" rel="noopener">官方文档</a></p>
+<h1 id="创建上下文"><a href="#创建上下文" class="headerlink" title="创建上下文"></a>创建上下文</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class BookContext:DbContext</span><br><span class="line">    &#123;</span><br><span class="line">        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)</span><br><span class="line">        &#123;</span><br><span class="line">            string constr &#x3D; &quot;Server&#x3D;192.168.146.128;database&#x3D;efbookdemo;uid&#x3D;sa;pwd&#x3D;Dy@Password&quot;;</span><br><span class="line">            optionsBuilder.UseSqlServer(constr);</span><br><span class="line">        &#125;</span><br><span class="line">        public DbSet&lt;Book&gt; Books &#123; get; set; &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>创建一数据类BookContext，继承DbContext，可以重写DbContext的OnConfiguring方法，在这里使用UseSqlServer拓展方法将上下文链接到SqlServer<br>定义字符串的另一种方法是使用依赖注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services.AddDbContext&lt;BookContext&gt;(option &#x3D;&gt; option.UseSqlServer(Configuration.GetConnectionString(&quot;SqlServerConnection&quot;)));</span><br></pre></td></tr></table></figure>
+<p>在appsettions里配置连接字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;ConnectionStrings&quot;: &#123;</span><br><span class="line">  &quot;SqlServerConnection&quot;: &quot;Server&#x3D;192.168.215.128;database&#x3D;Blog;uid&#x3D;sa;pwd&#x3D;Pass@Word;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;IActionResult&gt; CreateDatabase()</span><br><span class="line">        &#123;</span><br><span class="line">            bool created &#x3D; await _context.Database.EnsureCreatedAsync();</span><br><span class="line">            return Json(created);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>使用DbContext的Database属性时，会返回一个DatabaseFacade。调用EnsureCreatedAsync()方法确保建立了数据库，如果数据库存在此方法会返回false，不存在则会自动创建并返回true</p>
+<h1 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;IActionResult&gt; DeleteDatabase()</span><br><span class="line">        &#123;</span><br><span class="line">            bool deleted &#x3D; await _context.Database.EnsureDeletedAsync();</span><br><span class="line">            return Json(deleted);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>删除数据库和创建数据库非常相似，只需调用EnsureDeletedAsync()方法即可。</p>
+<h1 id="写入数据库"><a href="#写入数据库" class="headerlink" title="写入数据库"></a>写入数据库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;IActionResult&gt; AddBook()</span><br><span class="line">        &#123;</span><br><span class="line">            Book book1 &#x3D; new Book()</span><br><span class="line">            &#123;</span><br><span class="line">                Title &#x3D; &quot;C#入门经典1&quot;,</span><br><span class="line">                Author &#x3D; &quot;张三1&quot;</span><br><span class="line">            &#125;;</span><br><span class="line">            _context.Books.Add(book1);</span><br><span class="line">            Book book2 &#x3D; new Book()</span><br><span class="line">            &#123;</span><br><span class="line">                Title &#x3D; &quot;C#入门经典2&quot;,</span><br><span class="line">                Author &#x3D; &quot;张三2&quot;</span><br><span class="line">            &#125;;</span><br><span class="line">            Book book3 &#x3D; new Book()</span><br><span class="line">            &#123;</span><br><span class="line">                Title &#x3D; &quot;C#入门经典3&quot;,</span><br><span class="line">                Author &#x3D; &quot;张三3&quot;</span><br><span class="line">            &#125;;</span><br><span class="line">            _context.Books.AddRange(book2,book3);</span><br><span class="line">            var result &#x3D; await _context.SaveChangesAsync();</span><br><span class="line">            return Json(result);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>实例化一个Book对象，调用Add()方法即可，AddRange()可以批量添加数据。最后调用SaveChangesAsync()方法才会将数据真正的存到数据库。</p>
+<h1 id="读取数据库"><a href="#读取数据库" class="headerlink" title="读取数据库"></a>读取数据库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;IActionResult&gt; GetBook()</span><br><span class="line">        &#123;</span><br><span class="line">            var result &#x3D; await _context.Books.ToListAsync();</span><br><span class="line">            return Json(result);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>调用ToListAsync()方法即可查询所有数据。详细的后面再说。</p>
+<h1 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;IActionResult&gt; UpdataBook()</span><br><span class="line"> &#123;</span><br><span class="line">     var book &#x3D; await _context.Books.FindAsync(1);</span><br><span class="line">     book.Title &#x3D; book.Title + &quot;(修改)&quot;;</span><br><span class="line">     var result &#x3D; await _context.SaveChangesAsync();</span><br><span class="line">     return Json(result);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>更新记录非常简单，只需要把数据查出来，修改后调用SaveChangesAsync()方法即可。</p>
+<h1 id="删除记录"><a href="#删除记录" class="headerlink" title="删除记录"></a>删除记录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;IActionResult&gt; DeleteBook()</span><br><span class="line">        &#123;</span><br><span class="line">            var books &#x3D; await _context.Books.ToListAsync();</span><br><span class="line">            _context.Books.RemoveRange(books);</span><br><span class="line">            var result &#x3D; await _context.SaveChangesAsync();</span><br><span class="line">            return Json(result);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>删除与写入相似。</p>
+<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><h2 id="Linq查询"><a href="#Linq查询" class="headerlink" title="Linq查询"></a>Linq查询</h2><p>EF Core和Linq完美结合，Linq会被转换成SQL语句，然后查询。<br>会执行查询的Linq方法<br>ToList()//返回所有结果的集合<br>First()//返回第一笔数据，没有符合返回异常（报错）<br>FirstOrDefault()//返回第一笔数据，没有符合返回null<br>Single()//查询结果只有一笔数据，如果多或者没有这抛异常<br>SingleOrDefault()//查询结果只有一笔数据，如果多或者没有返回null<br>Last()//返回最后一笔数据，没有符合返回异常，配合Order By使用<br>LastOrDerfault()<br>Count()<br>LongCoun()<br>Min()<br>Max()<br>Average()<br>会执行查询的非Linq方法<br>Find(主键)</p>
+<h2 id="原生Sql查询"><a href="#原生Sql查询" class="headerlink" title="原生Sql查询"></a>原生Sql查询</h2><p>FromSqlRaw(“select * from books”)方法可以执行原生的sql。如果连接和内插的字符串 ($””) 带有用户提供的未经验证的值，则切勿将其传递到 FromSqlRaw。 通过 FromSqlInterpolated 方法，可采用一种能抵御 SQL 注入攻击的方式使用字符串内插语法。</p>
+<h2 id="即时加载相关数据"><a href="#即时加载相关数据" class="headerlink" title="即时加载相关数据"></a>即时加载相关数据</h2><p>当执行查询时可以使用Include方法并指定关系，可以理解为sql的join表连接，如果包含多个层次那么方法ThenInclude可以用于Include的查询结果。</p>
+<h1 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h1><p>打开程序包管理器控制台执行命令<br>Add-Migration InitialCreate 迁移数据库<br>Update-Database    更新到数据库<br>Script-Migration    生成数据库创建语句</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        <p id="RunningTime" class="copyright text-muted">
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+
+<script src="/js/highlight.pack.js"></script>
+
+
+<script src="/js/my.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-60},"mobile":{"show":false},"log":false});</script></body>
+</html>
+
